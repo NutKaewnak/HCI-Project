@@ -1,6 +1,3 @@
-/**
- * Created by Nicole on 5/9/2016 AD.
- */
 angular.module('todoApp', ['ui.router'])
     .controller('appController', function ($scope, $http, $window) {
 
@@ -11,7 +8,7 @@ angular.module('todoApp', ['ui.router'])
         $scope.courses ;
         $scope.search ;
         $scope.course_section ;
-        $scope.registered_courses = [];
+        $scope.registered_section = [];
         $scope.export_registered = [];
 
         // $scope.course = {"A", "B", "C"};
@@ -58,7 +55,7 @@ angular.module('todoApp', ['ui.router'])
 
         $scope.export_json = function () {
             console.log('export_json');
-            $scope.export_registered = $scope.registered_courses.slice(0);
+            $scope.export_registered = $scope.registered_section.slice(0);
             if (!$scope.export_registered) {
                 console.error('No data');
                 return;
@@ -68,7 +65,7 @@ angular.module('todoApp', ['ui.router'])
             // }
 
             if (typeof $scope.export_registered === 'object') {
-                $scope.export_registered = JSON.stringify($scope.registered_courses, undefined, 2);
+                $scope.export_registered = JSON.stringify($scope.registered_section, undefined, 2);
             }
 
             var blob = new Blob([$scope.export_registered], {type: 'text/json'}),
@@ -83,12 +80,13 @@ angular.module('todoApp', ['ui.router'])
             a.dispatchEvent(e);
         };
 
-        $scope.register_course = function(course) {
-            $scope.registered_courses.push(course);
+        $scope.register_section = function(course) {
+            $scope.registered_section.push(course);
         }
 
         $scope.drop_course = function(course){
-            $scope.registered_courses.splice($scope.registered_courses.indexOf(course));
+            console.log(course)
+            $scope.registered_section.splice($scope.registered_section.indexOf(course), 1);
         }
 
         $scope.select_enroll = function(course) {
@@ -105,5 +103,4 @@ angular.module('todoApp', ['ui.router'])
             // console.log('yah');
             $window.location.href = 'profile.html';
         };
-
     });

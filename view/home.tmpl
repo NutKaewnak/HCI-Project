@@ -1,64 +1,57 @@
 <body>
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed"
-                        data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">KU-Registration</a>
-            </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">Link</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            Dropdown
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">One more separated link</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <form class="navbar-form navbar-left" role="search">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search">
-                    </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </form>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">5610545676</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
 
-    <div ng-controller="appController as app">
-        <form class="form-inline">
-            <div class="form-group">
-                <label>Course ID</label>
-                <input type="text" class="form-control" ng-model="search" placeholder="EX: 01XXXXXX">
-            </div>
-            <label id="your-course">Your course</label>
-        </form>
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="table-group">
-                    <table class="table" id="course-table">
-                        <thead class="thead-inverse">
-                        </thead>
-                        <tbody ng-repeat="course in courses | filter:search">
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">KU-Registration</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">Link</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        Dropdown
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">One more separated link</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">5610545676</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div ng-controller="appController as app">
+    <div class="row">
+        <div class="col-sm-4">
+            <form class="form-inline">
+                <div class="form-group">
+                    <label>Course ID</label>
+                    <input type="text" class="form-control" ng-model="search" placeholder="EX: 01XXXXXX">
+                </div>
+                <label id="your-course">Your course</label>
+            </form>
+            <div class="table-group">
+                <table class="table" id="course-table">
+                    <tbody ng-repeat="course in courses | filter:search">
                         <tr>
                             <th scope="row">{{course.id}}</th>
                             <td>{{course.name.en}}</td>
@@ -70,14 +63,13 @@
                                         data-target=".enroll-modal"
                                         data-backdrop="static"
                                         data-keyboard="false">
-                                    <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>
+                                    <span class="text-success"></span>
                                     Enroll
                                 </button>
                             </td>
                         </tr>
-                        </tbody>
-                    </table>
-                </div>
+                    </tbody>
+                </table>
                 <div class="modal fade enroll-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
@@ -89,42 +81,53 @@
                             </div>
                             <div class="modal-body">
                                 <ul class="list-group" ng-repeat="section in course_section">
-                                    <li class="list-group-item">{{section.id}} - {{section.date}}
+                                    <li class="list-group-item">{{section.id}} - {{section.date}} {{section.type}}
                                         <button class="btn btn-primary"
-                                                ng-click="register_course(selected_course)"
+                                                ng-click="register_section(selected_course)"
                                                 aria-label="Close"
                                                 data-dismiss="modal">
                                             Register
-                                        </button></li>
+                                        </button>
+                                    </li>
                                 </ul>
                             </div>
-                            <h4 id="detail">{{selected_course.description.en}}</h4>
+                            <h4 id="detailEn">{{selected_course.description.en}}</h4>
+                            <h4 id="detailTh">{{selected_course.description.th}}</h4>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-4">
-                <!-- Your course table -->
-                <div class="your-course-table-group">
-                    <table class="table" id="registered-table">
-                        <thead class="thead-inverse">
-                        </thead>
-                        <tbody ng-repeat="course in registered_courses">
-                        <tr>
-                            <th scope="row">{{course.id}}</th>
-                            <td>{{course.name.en}}</td>
-                            <td>
-                                <button class="btn icon-btn btn-danger" data-toggle="modal" ng-click="drop_course(course)">
-                                    <span class="glyphicon btn-glyphicon glyphicon-minus img-circle text-warning"></span>
-                                    Drop
-                                </button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+        </div>
+
+        <div class="col-sm-8">
+            <div id="calendar"></div>
+            <script type="text/javascript">
+                var calendar = $('#calendar').calendar({language: 'xx-XX'});
+            </script>
+            </div>
+
+        <div class="col-sm-4">
+            <h2>Enrolled Course</h2>
+            <!-- Your course table -->
+            <div class="your-course-table-group">
+                <table class="table" id="registered-table">
+                    <tbody ng-repeat="course in registered_section">
+                    <tr>
+                        <th scope="row">{{course.id}}</th>
+                        <td>{{course.name.en}}</td>
+                        <td>
+                            <button class="btn icon-btn btn-danger" data-toggle="modal" ng-click="drop_course(course)">
+                                <span class="text-warning"></span>
+                                Drop
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
+
     </div>
+</div>
 
 </body>

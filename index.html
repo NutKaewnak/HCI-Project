@@ -6,10 +6,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <title>BootstrapTest</title>
-
         <!-- Bootstrap -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
-        <!--<link rel="stylesheet" href="css/style.css">-->
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="bower_components/bootstrap-calendar/css/calendar.css">
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -18,17 +18,26 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
     </head>
+
     <body>
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
         <script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
-        <script src="https://code.jquery.com/jquery-1.12.2.min.js"></script>
+        <script src="https://code.jquery.com/jquery-latest.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="./bower_components/bootstrap-calendar/js/calendar.js"></script>
+        <script type="text/javascript">
+            var calendar = $("#calendar").calendar(
+                    {
+                        tmpl_path: "/bower_companants/bootstrap-calendar/tmpls/",
+                        events_source: function () { return []; }
+                    });
+        </script>
         <script src="js/controller/app.js"></script>
         <script src="js/route/route.js"></script>
+        <!--<script src="js/weekly_schedule.js"></script>-->
 
         <div ui-view></div>
-
     </body>
 </html>
