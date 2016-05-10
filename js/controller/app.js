@@ -58,13 +58,21 @@ angular.module('todoApp', ['ui.router'])
         $scope.register_section = function(course, section) {
             var is_repeat = false;
             $scope.registered_section.forEach(function(x){
-                if ( x.course.id == course.id && x.section.id == section.id && x.section.type == section.type){
+                if ( x.course.id == course.id && x.section.type == section.type){
                     is_repeat = true;
                 }
             });
             if ( ! is_repeat ) {
                 var registing_course = {course: course, section: section};
                 $scope.registered_section.push(registing_course);
+                var date = section.date.split(" ");
+                var start_time = parseInt(date[1][0] + date[1][1]);
+                var stop_time = parseInt(date[1][6] + date[1][7]);
+                for (var i = 0 ; i < stop_time-start_time ; i++){
+                    var table_id = date[0] + ("0" + (start_time + i)).slice(-2);
+                    $('#'+table_id).addClass('danger');
+                }
+
             }
         }
 
@@ -87,10 +95,5 @@ angular.module('todoApp', ['ui.router'])
             // console.log('yah');
             $window.location.href = 'profile.html';
         };
-
-        $('td:contains("True")').addClass('success');
-
-        $('td:contains("False")').addClass('danger');
-        $('#mon-09').addClass('danger');
 
     });
