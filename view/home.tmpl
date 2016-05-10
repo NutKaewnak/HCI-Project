@@ -41,13 +41,13 @@
 
 <div ng-controller="appController as app">
     <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-4">
             <form class="form-inline">
                 <div class="form-group">
                     <label>Course ID</label>
                     <input type="text" class="form-control" ng-model="search" placeholder="EX: 01XXXXXX">
                 </div>
-                <label id="your-course">Your course</label>
             </form>
             <div class="table-group">
                 <table class="table" id="course-table">
@@ -57,7 +57,7 @@
                             <td>{{course.name.en}}</td>
                             <td>
                                 <!-- Button trigger modal -->
-                                <button class="btn icon-btn btn-success"
+                                <button class="btn icon-btn btn-info"
                                         data-toggle="modal"
                                         ng-click="select_enroll(course)"
                                         data-target=".enroll-modal"
@@ -77,71 +77,77 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
-                                <h3 id="course">{{selected_course.id}} - {{selected_course.name.en}}</h3>
+                                <h2 id="course">{{selected_course.id}} - {{selected_course.name.en}}</h2>
                             </div>
                             <div class="modal-body">
                                 <ul class="list-group" ng-repeat="section in course_section">
-                                    <li class="list-group-item">{{section.id}} - {{section.date}} {{section.type}}
-                                        <button class="btn btn-primary"
-                                                ng-click="register_section(selected_course)"
-                                                aria-label="Close"
-                                                data-dismiss="modal">
-                                            Register
-                                        </button>
+                                    <li class="list-group-item">
+                                        <p class="text"><b>Section: </b>{{section.id}} - {{section.date}} <b>{{section.type}}</b>
+                                            <label class="pull-right">
+                                                <button class="btn btn-success"
+                                                        ng-click="register_section(selected_course, section)"
+                                                        aria-label="Close"
+                                                        data-dismiss="modal">
+                                                    <span class="text-success"></span>
+                                                    Register
+                                                </button>
+                                            </label>
+                                        </p>
                                     </li>
                                 </ul>
+                                <h5 id="detailEn">{{selected_course.description.en}}</h5>
+                                <h5 id="detailTh">{{selected_course.description.th}}</h5>
                             </div>
-                            <h4 id="detailEn">{{selected_course.description.en}}</h4>
-                            <h4 id="detailTh">{{selected_course.description.th}}</h4>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-sm-8">
-            <div class="table-bordered">
-                <table class="table" id="weekly-cal">
+        <div class="col-sm-6">
+            <div class="table-responsive">
+                <table class="table table-striped" id="weekly-cal">
                     <thead>
-                        <td></td>
+                        <th></th>
                         <th>Sunday</th> <th>Monday</th> <th>Tuesday</th> <th>Wednesday</th> <th>Thursday</th> <th>Friday</th> <th>Saturday</th>
                     </thead>
-                    <tr>
-                        <th>8:00 - 9:00</th> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-                    </tr>
-                    <tr>
-                        <th>9:00 - 10:00</th> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-                    </tr>
-                    <tr>
-                        <th>10:00 - 11:00</th> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-                    </tr>
-                    <tr>
-                        <th>11:00 - 12:00</th> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-                    </tr>
-                    <tr>
-                        <th>12:00 - 13:00</td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-                    </tr>
-                    <tr>
-                        <th>13:00 - 14:00</th> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-                    </tr>
-                    <tr>
-                        <th>14:00 - 15:00</th> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-                    </tr>
-                    <tr>
-                        <th>15:00 - 16:00</th> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-                    </tr>
-                    <tr>
-                        <th>16:00 - 17:00</th> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-                    </tr>
-                    <tr>
-                        <th>17:00 - 18:00</th> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-                    </tr>
-                    <tr>
-                        <th>18:00 - 19:00</th> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-                    </tr>
-                    <tr>
-                        <th>19:00 - 20:00</td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <th>08:00 - 09:00</th> <td id="Sun08"></td> <td id="Mon08"></td> <td id="Tue08"></td> <td id="Wed08"></td> <td id="Thu08"></td> <td id="Fri08"></td> <td id="Sat08"></td>
+                        </tr>
+                        <tr>
+                            <th>09:00 - 10:00</th> <td id="Sun09"></td> <td id="Mon09"></td> <td id="Tue09"></td> <td id="Wed09"></td> <td id="Thu09"></td> <td id="Fri09"></td> <td id="Sat09"></td>
+                        </tr>
+                        <tr>
+                            <th>10:00 - 11:00</th> <td id="Sun10"></td> <td id="Mon10"></td> <td id="Tue10"></td> <td id="Wed10"></td> <td id="Thu10"></td> <td id="Fri10"></td> <td id="Sat10"></td>
+                        </tr>
+                        <tr>
+                            <th>11:00 - 12:00</th> <td id="Sun11"></td> <td id="Mon11"></td> <td id="Tue11"></td> <td id="Wed11"></td> <td id="Thu11"></td> <td id="Fri11"></td> <td id="Sat11"></td>
+                        </tr>
+                        <tr>
+                            <th>12:00 - 13:00</th> <td id="Sun12"></td> <td id="Mon12"></td> <td id="Tue12"></td> <td id="Wed12"></td> <td id="Thu12"></td> <td id="Fri12"></td> <td id="Sat12"></td>
+                        </tr>
+                        <tr>
+                            <th>13:00 - 14:00</th> <td id="Sun13"></td> <td id="Mon13"></td> <td id="Tue13"></td> <td id="Wed13"></td> <td id="Thu13"></td> <td id="Fri13"></td> <td id="Sat13"></td>
+                        </tr>
+                        <tr>
+                            <th>14:00 - 15:00</th> <td id="Sun14"></td> <td id="Mon14"></td> <td id="Tue14"></td> <td id="Wed14"></td> <td id="Thu14"></td> <td id="Fri14"></td> <td id="Sat14"></td>
+                        </tr>
+                        <tr>
+                            <th>15:00 - 16:00</th> <td id="Sun15"></td> <td id="Mon15"></td> <td id="Tue15"></td> <td id="Wed15"></td> <td id="Thu15"></td> <td id="Fri15"></td> <td id="Sat15"></td>
+                        </tr>
+                        <tr>
+                            <th>16:00 - 17:00</th> <td id="Sun16"></td> <td id="Mon16"></td> <td id="Tue16"></td> <td id="Wed16"></td> <td id="Thu16"></td> <td id="Fri16"></td> <td id="Sat16"></td>
+                        </tr>
+                        <tr>
+                            <th>17:00 - 18:00</th> <td id="Sun17"></td> <td id="Mon17"></td> <td id="Tue17"></td> <td id="Wed17"></td> <td id="Thu17"></td> <td id="Fri17"></td> <td id="Sat17"></td>
+                        </tr>
+                        <tr>
+                            <th>18:00 - 19:00</th> <td id="Sun18"></td> <td id="Mon18"></td> <td id="Tue18"></td> <td id="Wed18"></td> <td id="Thu18"></td> <td id="Fri18"></td> <td id="Sat18"></td>
+                        </tr>
+                        <tr>
+                            <th>19:00 - 20:00</th> <td id="Sun19"></td> <td id="Mon19"></td> <td id="Tue19"></td> <td id="Wed19"></td> <td id="Thu19"></td> <td id="Fri19"></td> <td id="Sat19"></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -157,7 +163,7 @@
                         <th scope="row">{{course.id}}</th>
                         <td>{{course.name.en}}</td>
                         <td>
-                            <button class="btn icon-btn btn-danger" data-toggle="modal" ng-click="drop_course(course)">
+                            <button class="btn btn-danger" data-toggle="modal" ng-click="drop_course(course)">
                                 <span class="text-warning"></span>
                                 Drop
                             </button>
