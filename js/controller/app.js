@@ -56,8 +56,16 @@ angular.module('todoApp', ['ui.router'])
         };
 
         $scope.register_section = function(course, section) {
-            var registrating_course = {course:course, section:section};
-            $scope.registered_section.push(registrating_course);
+            var is_repeat = false;
+            $scope.registered_section.forEach(function(x){
+                if ( x.course.id == course.id && x.section.id == section.id && x.section.type == section.type){
+                    is_repeat = true;
+                }
+            });
+            if ( ! is_repeat ) {
+                var registing_course = {course: course, section: section};
+                $scope.registered_section.push(registing_course);
+            }
         }
 
         $scope.drop_course = function(course){

@@ -160,8 +160,8 @@
                 <table class="table" id="registered-table">
                     <tbody ng-repeat="course in registered_section">
                     <tr>
-                        <th scope="row">{{course.id}}</th>
-                        <td>{{course.name.en}}</td>
+                        <th scope="row">{{course.course.id}}</th>
+                        <td>{{course.course.name.en}} - {{course.section.type}} {{course.section.id}} </td>
                         <td>
                             <button class="btn btn-danger" data-toggle="modal" ng-click="drop_course(course)">
                                 <span class="text-warning"></span>
