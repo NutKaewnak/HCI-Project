@@ -63,8 +63,9 @@ angular.module('todoApp', ['ui.router'])
                 }
             });
             if ( ! is_repeat ) {
-                var registing_course = {course: course, section: section};
+                var registing_course = {course: {name:{en:course.name.en}, credit:course.credit, id:course.id}, section: section};
                 $scope.registered_section.push(registing_course);
+
                 var date = section.date.split(" ");
                 var start_time = parseInt(date[1][0] + date[1][1]);
                 var stop_time = parseInt(date[1][6] + date[1][7]);
@@ -91,9 +92,30 @@ angular.module('todoApp', ['ui.router'])
             });
         }
 
-        $scope.test_click = function() {
-            // console.log('yah');
-            $window.location.href = 'profile.html';
-        };
+        $scope.saveToPc = function (filename) {
+            var data = $scope.registered_section;
+            if (!data) {
+                console.error('No data');
+                return;
+            }
 
+            if (!filename) {
+                filename = 'download.json';
+            }
+
+            if (typeof data === 'object') {
+                data = JSON.stringify(data, undefined, 2);
+            }
+
+            var blob = new Blob([data], {type: 'text/json'}),
+                e = document.createEvent('MouseEvents'),
+                a = document.createElement('a');
+
+            a.download = filename;
+            a.href = window.URL.createObjectURL(blob);
+            a.dataset.downloadurl = ['text/json', a.download, a.href].join(':');
+            e.initEvent('click', true, false, window,
+                0, 0, 0, 0, 0, false, false, false, false, 0, null);
+            a.dispatchEvent(e);
+        };
     });
